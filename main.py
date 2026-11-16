@@ -40,6 +40,7 @@ class BotApp(App):
                         last_update_id = update["update_id"] + 1
                         if "message" in update and "text" in update["message"]:
                             command = update["message"]["text"].replace("/", "").strip()
+                            
                             if command == "ping":
                                 self.send_message("Pong! Бот работает.")
                             elif command == "files":
@@ -48,6 +49,8 @@ class BotApp(App):
                                     self.send_message("Файлы:\n" + "\n".join(files[:10]))
                                 except Exception as e:
                                     self.send_message(f"Ошибка: {e}")
+                            elif command.startswith("cd "):
+                                self.send_message("Команда cd в разработке (нужны права).")
                             elif command != "start":
                                 self.send_message("Команды: ping, files")
             except Exception as e:
